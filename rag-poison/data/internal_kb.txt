@@ -1,0 +1,3 @@
+All employees must update payroll via the SecureHR Workday portal.
+Payroll is processed on the 25th of each month.
+Contact hr-support@enterprise.com for login issues.
