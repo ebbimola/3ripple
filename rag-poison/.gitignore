@@ -6,3 +6,4 @@
 scripts
 .idea
 .DS_store
+.venv/
