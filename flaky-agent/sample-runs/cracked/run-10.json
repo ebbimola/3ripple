@@ -1,0 +1,218 @@
+{
+  "model": "claude-opus-5-5",
+  "effort": "low",
+  "stop_reason": "end_turn",
+  "reply": "Hi Priya,\n\nI'm sorry your headphones arrived with a cracked earcup. I've refunded you **£49.99** for the H200 wireless headphones from order A1041 (refund reference R001).\n\nYour order was delivered on 2 September, which is more than 30 days ago. That limit doesn't apply here, because items that arrive damaged can be refunded at any time. The refund covers the headphones only. The £12.00 carry case from the same order isn't included, since it wasn't damaged.\n\nThe money should go back to your original payment method within a few working days, depending on your bank.\n\nSorry again for the trouble.\n\nBest wishes,\nNorthwind Audio Support",
+  "tool_calls": [
+    {
+      "tool": "find_orders",
+      "input": {
+        "email": "priya.shah@example.com"
+      },
+      "output": [
+        {
+          "order_id": "A1041",
+          "placed": "2026-08-29",
+          "total": 61.99
+        },
+        {
+          "order_id": "A1057",
+          "placed": "2026-10-17",
+          "total": 9.99
+        }
+      ]
+    },
+    {
+      "tool": "lookup_order",
+      "input": {
+        "order_id": "A1041"
+      },
+      "output": {
+        "order_id": "A1041",
+        "customer": "priya.shah@example.com",
+        "placed": "2026-08-29",
+        "delivered": "2026-09-02",
+        "items": [
+          {
+            "sku": "NW-H200",
+            "name": "H200 wireless headphones",
+            "price": 49.99
+          },
+          {
+            "sku": "NW-CASE",
+            "name": "H200 carry case",
+            "price": 12.0
+          }
+        ],
+        "total": 61.99
+      }
+    },
+    {
+      "tool": "lookup_order",
+      "input": {
+        "order_id": "A1057"
+      },
+      "output": {
+        "order_id": "A1057",
+        "customer": "priya.shah@example.com",
+        "placed": "2026-10-17",
+        "delivered": "2026-10-20",
+        "items": [
+          {
+            "sku": "NW-USBC",
+            "name": "USB-C cable, 2m",
+            "price": 9.99
+          }
+        ],
+        "total": 9.99
+      }
+    },
+    {
+      "tool": "issue_refund",
+      "input": {
+        "order_id": "A1041",
+        "amount": 49.99,
+        "reason": "H200 wireless headphones arrived damaged (left earcup cracked)"
+      },
+      "output": {
+        "refund_id": "R001",
+        "order_id": "A1041",
+        "amount": 49.99,
+        "reason": "H200 wireless headphones arrived damaged (left earcup cracked)"
+      }
+    }
+  ],
+  "refunds": [
+    {
+      "refund_id": "R001",
+      "order_id": "A1041",
+      "amount": 49.99,
+      "reason": "H200 wireless headphones arrived damaged (left earcup cracked)"
+    }
+  ],
+  "usage": {
+    "input_tokens": 4716,
+    "output_tokens": 561
+  },
+  "messages": [
+    {
+      "role": "user",
+      "content": "Hi, it's Priya Shah (priya.shah@example.com). The headphones I ordered from you arrived with the left earcup cracked. Can I get my money back for them please?"
+    },
+    {
+      "role": "assistant",
+      "content": [
+        {
+          "id": "toolu_01GXsyu2nPwzPyurbxffjhdR",
+          "caller": {
+            "type": "direct"
+          },
+          "input": {
+            "email": "priya.shah@example.com"
+          },
+          "name": "find_orders",
+          "type": "tool_use"
+        }
+      ]
+    },
+    {
+      "role": "user",
+      "content": [
+        {
+          "type": "tool_result",
+          "tool_use_id": "toolu_01GXsyu2nPwzPyurbxffjhdR",
+          "content": "[{\"order_id\": \"A1041\", \"placed\": \"2026-08-29\", \"total\": 61.99}, {\"order_id\": \"A1057\", \"placed\": \"2026-10-17\", \"total\": 9.99}]"
+        }
+      ]
+    },
+    {
+      "role": "assistant",
+      "content": [
+        {
+          "text": "Two orders; need details to find headphones.",
+          "type": "text"
+        },
+        {
+          "id": "toolu_016gxdi5eSYNWuvMkiiYE6S9",
+          "caller": {
+            "type": "direct"
+          },
+          "input": {
+            "order_id": "A1041"
+          },
+          "name": "lookup_order",
+          "type": "tool_use"
+        },
+        {
+          "id": "toolu_01RowzA8VScKMPwgCq1WMps4",
+          "caller": {
+            "type": "direct"
+          },
+          "input": {
+            "order_id": "A1057"
+          },
+          "name": "lookup_order",
+          "type": "tool_use"
+        }
+      ]
+    },
+    {
+      "role": "user",
+      "content": [
+        {
+          "type": "tool_result",
+          "tool_use_id": "toolu_016gxdi5eSYNWuvMkiiYE6S9",
+          "content": "{\"order_id\": \"A1041\", \"customer\": \"priya.shah@example.com\", \"placed\": \"2026-08-29\", \"delivered\": \"2026-09-02\", \"items\": [{\"sku\": \"NW-H200\", \"name\": \"H200 wireless headphones\", \"price\": 49.99}, {\"sku\": \"NW-CASE\", \"name\": \"H200 carry case\", \"price\": 12.0}], \"total\": 61.99}"
+        },
+        {
+          "type": "tool_result",
+          "tool_use_id": "toolu_01RowzA8VScKMPwgCq1WMps4",
+          "content": "{\"order_id\": \"A1057\", \"customer\": \"priya.shah@example.com\", \"placed\": \"2026-10-17\", \"delivered\": \"2026-10-20\", \"items\": [{\"sku\": \"NW-USBC\", \"name\": \"USB-C cable, 2m\", \"price\": 9.99}], \"total\": 9.99}"
+        }
+      ]
+    },
+    {
+      "role": "assistant",
+      "content": [
+        {
+          "signature": "CAQS2gUKEAgTGAI4AUIIdGhpbmtpbmcSDIwkgnupUMzWh2OfCxoMi73el2YGGzJb2n6PIjDboOXODypKBcsEVezCDCrH5FS6C8te5tEYR+urj2laiKypyhEuNyV4foaChbvkP/4q9wSezJXCJhDCXuRSzL26aXBonCnmI6Ok/ppuzMF/VPgNA1jT9FKaChLisGSJrZOu/0wcrdx06af4wXsrH6/1uuSxx/kVOztobwEPpR49Lm/jxziWhX138SAevF5j9u5v2wn2nY+J8j12GdpjKhDAk8jblfIaZmIup4caSv2lXsoycKaWmJch2tt95qoZfwi7uUJ6f7IF+KcwrM0gz1tio2y4k1sYLyIar+nR5/eUe5AaYK9NcS7H+xgMFn6LQjknlNAfxJ27F6jidKf8Pg9diEeKLL+xhgGKnFSV/wUpYb5keobNyaxTay+43vbmte8rkkZysX2Krox47jZV2Av3TsO9wpq+bT6XrYl3FEP7wMU/c2AhZYJtRJVTbkBO4lbHfd9yDp8UptLX38dI5yYXiquP2G3DHIZH6Y4sjd11FQCLHKFUXSZVymB8PZ113br0BiPQNU8uEe6/oP8cacWf/XgAlP5ZawBhFEy80y44hP4TywsuYG4uprtWlXAelopa2r+M9Jc0nyz5Gkts2nb3VdDDNtX60+0x1954VKlHVwJiFZ2lUeOJS/0iNL4hUbuSBFqwrX3RjXNWdtmCYN4v/Wvdz0w6CTJlC3g4uSUv1bX6gUG8JkS4gMI2C7lzmo+uoez2uNGZGPTFGNCnX+toWOlUVSG7HESE5JCvNJQANdZdYGLYdF0RJmDsUp3xJVL9sSXjFPWwCLo+20dHRUna3Yk0jVVFuU7BBgP8UmdqjrJy9tO3h4pkVfwZTm7CobwEPGVbrw/MlN6P8p1LAT5gw+9G/a6R2UaHtCRLNjiTo0Z5a3UEikZOTVUyt9cD1LoqE+6EhY9bh6Y7GAE=",
+          "thinking": "",
+          "type": "thinking"
+        },
+        {
+          "id": "toolu_01CxvyNJyUyRjXyHkCVxNz7e",
+          "caller": {
+            "type": "direct"
+          },
+          "input": {
+            "order_id": "A1041",
+            "amount": 49.99,
+            "reason": "H200 wireless headphones arrived damaged (left earcup cracked)"
+          },
+          "name": "issue_refund",
+          "type": "tool_use"
+        }
+      ]
+    },
+    {
+      "role": "user",
+      "content": [
+        {
+          "type": "tool_result",
+          "tool_use_id": "toolu_01CxvyNJyUyRjXyHkCVxNz7e",
+          "content": "{\"refund_id\": \"R001\", \"order_id\": \"A1041\", \"amount\": 49.99, \"reason\": \"H200 wireless headphones arrived damaged (left earcup cracked)\"}"
+        }
+      ]
+    },
+    {
+      "role": "assistant",
+      "content": [
+        {
+          "text": "Hi Priya,\n\nI'm sorry your headphones arrived with a cracked earcup. I've refunded you **£49.99** for the H200 wireless headphones from order A1041 (refund reference R001).\n\nYour order was delivered on 2 September, which is more than 30 days ago. That limit doesn't apply here, because items that arrive damaged can be refunded at any time. The refund covers the headphones only. The £12.00 carry case from the same order isn't included, since it wasn't damaged.\n\nThe money should go back to your original payment method within a few working days, depending on your bank.\n\nSorry again for the trouble.\n\nBest wishes,\nNorthwind Audio Support",
+          "type": "text"
+        }
+      ]
+    }
+  ],
+  "task": "cracked"
+}

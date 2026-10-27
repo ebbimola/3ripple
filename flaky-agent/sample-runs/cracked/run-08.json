@@ -1,0 +1,222 @@
+{
+  "model": "claude-opus-5-5",
+  "effort": "low",
+  "stop_reason": "end_turn",
+  "reply": "Hi Priya,\n\nI'm sorry your headphones arrived with a cracked earcup. I've refunded the **£49.99** you paid for the H200 wireless headphones on order A1041 (refund ref: R001). It should reach your original payment method within a few working days.\n\nThat order was delivered on 2 September, which is more than 30 days ago. Items that arrive damaged can be refunded at any time, though, so the date didn't matter here. The refund covers only the headphones. The £12.00 carry case from the same order isn't included, because it's outside the 30-day window and you didn't mention any problem with it.\n\nThanks for letting us know, and sorry again for the trouble.\n\nBest wishes,\nNorthwind Audio Support",
+  "tool_calls": [
+    {
+      "tool": "find_orders",
+      "input": {
+        "email": "priya.shah@example.com"
+      },
+      "output": [
+        {
+          "order_id": "A1041",
+          "placed": "2026-08-29",
+          "total": 61.99
+        },
+        {
+          "order_id": "A1057",
+          "placed": "2026-10-17",
+          "total": 9.99
+        }
+      ]
+    },
+    {
+      "tool": "lookup_order",
+      "input": {
+        "order_id": "A1041"
+      },
+      "output": {
+        "order_id": "A1041",
+        "customer": "priya.shah@example.com",
+        "placed": "2026-08-29",
+        "delivered": "2026-09-02",
+        "items": [
+          {
+            "sku": "NW-H200",
+            "name": "H200 wireless headphones",
+            "price": 49.99
+          },
+          {
+            "sku": "NW-CASE",
+            "name": "H200 carry case",
+            "price": 12.0
+          }
+        ],
+        "total": 61.99
+      }
+    },
+    {
+      "tool": "lookup_order",
+      "input": {
+        "order_id": "A1057"
+      },
+      "output": {
+        "order_id": "A1057",
+        "customer": "priya.shah@example.com",
+        "placed": "2026-10-17",
+        "delivered": "2026-10-20",
+        "items": [
+          {
+            "sku": "NW-USBC",
+            "name": "USB-C cable, 2m",
+            "price": 9.99
+          }
+        ],
+        "total": 9.99
+      }
+    },
+    {
+      "tool": "issue_refund",
+      "input": {
+        "order_id": "A1041",
+        "amount": 49.99,
+        "reason": "H200 headphones arrived damaged (left earcup cracked)"
+      },
+      "output": {
+        "refund_id": "R001",
+        "order_id": "A1041",
+        "amount": 49.99,
+        "reason": "H200 headphones arrived damaged (left earcup cracked)"
+      }
+    }
+  ],
+  "refunds": [
+    {
+      "refund_id": "R001",
+      "order_id": "A1041",
+      "amount": 49.99,
+      "reason": "H200 headphones arrived damaged (left earcup cracked)"
+    }
+  ],
+  "usage": {
+    "input_tokens": 4700,
+    "output_tokens": 592
+  },
+  "messages": [
+    {
+      "role": "user",
+      "content": "Hi, it's Priya Shah (priya.shah@example.com). The headphones I ordered from you arrived with the left earcup cracked. Can I get my money back for them please?"
+    },
+    {
+      "role": "assistant",
+      "content": [
+        {
+          "id": "toolu_01VcpS71TZhVYJ1cZGhPArjT",
+          "caller": {
+            "type": "direct"
+          },
+          "input": {
+            "email": "priya.shah@example.com"
+          },
+          "name": "find_orders",
+          "type": "tool_use"
+        }
+      ]
+    },
+    {
+      "role": "user",
+      "content": [
+        {
+          "type": "tool_result",
+          "tool_use_id": "toolu_01VcpS71TZhVYJ1cZGhPArjT",
+          "content": "[{\"order_id\": \"A1041\", \"placed\": \"2026-08-29\", \"total\": 61.99}, {\"order_id\": \"A1057\", \"placed\": \"2026-10-17\", \"total\": 9.99}]"
+        }
+      ]
+    },
+    {
+      "role": "assistant",
+      "content": [
+        {
+          "text": "Both could contain headphones; check both.",
+          "type": "text"
+        },
+        {
+          "id": "toolu_01B1tNhXUg8YWcQyfpHouG3N",
+          "caller": {
+            "type": "direct"
+          },
+          "input": {
+            "order_id": "A1041"
+          },
+          "name": "lookup_order",
+          "type": "tool_use"
+        },
+        {
+          "id": "toolu_01KuVSvSdNdgnxqFyLmXQewf",
+          "caller": {
+            "type": "direct"
+          },
+          "input": {
+            "order_id": "A1057"
+          },
+          "name": "lookup_order",
+          "type": "tool_use"
+        }
+      ]
+    },
+    {
+      "role": "user",
+      "content": [
+        {
+          "type": "tool_result",
+          "tool_use_id": "toolu_01B1tNhXUg8YWcQyfpHouG3N",
+          "content": "{\"order_id\": \"A1041\", \"customer\": \"priya.shah@example.com\", \"placed\": \"2026-08-29\", \"delivered\": \"2026-09-02\", \"items\": [{\"sku\": \"NW-H200\", \"name\": \"H200 wireless headphones\", \"price\": 49.99}, {\"sku\": \"NW-CASE\", \"name\": \"H200 carry case\", \"price\": 12.0}], \"total\": 61.99}"
+        },
+        {
+          "type": "tool_result",
+          "tool_use_id": "toolu_01KuVSvSdNdgnxqFyLmXQewf",
+          "content": "{\"order_id\": \"A1057\", \"customer\": \"priya.shah@example.com\", \"placed\": \"2026-10-17\", \"delivered\": \"2026-10-20\", \"items\": [{\"sku\": \"NW-USBC\", \"name\": \"USB-C cable, 2m\", \"price\": 9.99}], \"total\": 9.99}"
+        }
+      ]
+    },
+    {
+      "role": "assistant",
+      "content": [
+        {
+          "text": "Headphones arrived damaged, so the 30-day limit doesn't apply. I'll refund the headphones only, not the case.",
+          "type": "text"
+        },
+        {
+          "id": "toolu_01DwHZEFfZDpoabFqXpdtHzw",
+          "caller": {
+            "type": "direct"
+          },
+          "input": {
+            "order_id": "A1041",
+            "amount": 49.99,
+            "reason": "H200 headphones arrived damaged (left earcup cracked)"
+          },
+          "name": "issue_refund",
+          "type": "tool_use"
+        }
+      ]
+    },
+    {
+      "role": "user",
+      "content": [
+        {
+          "type": "tool_result",
+          "tool_use_id": "toolu_01DwHZEFfZDpoabFqXpdtHzw",
+          "content": "{\"refund_id\": \"R001\", \"order_id\": \"A1041\", \"amount\": 49.99, \"reason\": \"H200 headphones arrived damaged (left earcup cracked)\"}"
+        }
+      ]
+    },
+    {
+      "role": "assistant",
+      "content": [
+        {
+          "signature": "CAQSuQUKEAgTGAI4AUIIdGhpbmtpbmcSDKtkC1lLhWqlbqU7ghoMeEp6q85yu8QgST+UIjD3LQO4UHy4n8nq/SkDSu6L5uMEDc5MbLd5sSdt5/igpEpoTXdDlKl0aYOUZwGrvK8q1gTNX/YXYuLpsWJtwOmIiZXtK0g5OpmIAoZgDi55JSpouffLVc1Vdj2QjD0e+eU2aaQcZDwfbwo/JiY/K4NskPASME0ooJhb8F6wt0RgzhOv5kAPA/VFApqSCvll8B4rotWnFFcqwGYjdeo0zR0ZVqgHx1qywUfCIboWjMcZ5ahgyZbgQ6YAZe847ePLOUdee4alPa2sS0A0fsv+nzZRHAWMEySXr1509QrOHGxaLlQYz8mfCZe2gVaGtT6ZSdvEYi8xuxeJ8f0G2e1oPDFfXRoo0n5ZjrT8oPpn+o8D/fd0NUtLRgfKwy42NyMLRw58MJKzRMoicZmVsfcDs2MTxWlcpQle0Va43z6tTgQLd7GPJUWoH8sablzndwnYkm8b5IJhC9MiREpkzTemwtbz7PMWnPilIfJGfbiWU5W7Xn/Nnt5AwwvXSGA2Dl/vGCO7PyTW6Njf7AEgyAKNoh2M3ma+zfh1MHqrKgTflb8np0XLVvjA05ZtUMvJNWUrDm4WlYabs4mBnuYWvxrxrb+FLVaUezV78g3cdBrhlQJ6HEwSpsd/ZttlRMlaDsaDJbmaajiyDiLJngIMNcGxltUeI1zk8MP1vsdApmbA1aZzkUGCSc3fnmPBCAlRtfl9a/o2LWf9VxzQhNexYs8Womt1nKw5NpwC5lkfa5YAaisnnqdT8BKc1x5N23H9Y5chnrF5ri/Xn/6lmovXUPRA54N3h4LzAW6ET9pz15B9bO/rwQSUzQsCP3mU5TboXNeoSyFXpuWDC9jdE8+yoHscm5+nDQUMl+49ZNXkGAE=",
+          "thinking": "",
+          "type": "thinking"
+        },
+        {
+          "text": "Hi Priya,\n\nI'm sorry your headphones arrived with a cracked earcup. I've refunded the **£49.99** you paid for the H200 wireless headphones on order A1041 (refund ref: R001). It should reach your original payment method within a few working days.\n\nThat order was delivered on 2 September, which is more than 30 days ago. Items that arrive damaged can be refunded at any time, though, so the date didn't matter here. The refund covers only the headphones. The £12.00 carry case from the same order isn't included, because it's outside the 30-day window and you didn't mention any problem with it.\n\nThanks for letting us know, and sorry again for the trouble.\n\nBest wishes,\nNorthwind Audio Support",
+          "type": "text"
+        }
+      ]
+    }
+  ],
+  "task": "cracked"
+}

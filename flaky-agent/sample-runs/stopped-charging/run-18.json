@@ -1,0 +1,219 @@
+{
+  "task": "stopped-charging",
+  "model": "claude-opus-5-5",
+  "effort": "low",
+  "stop_reason": "end_turn",
+  "reply": "I've refunded you £49.99 for the H200 headphones, but I can't refund the £12.00 carry case.\n\nHi Priya,\n\nSorry to hear your H200 headphones stopped charging. I checked order A1041 and processed a refund:\n\n- **H200 wireless headphones: £49.99 refunded** (reference R001). Faulty items can be refunded at any time, so the headphones qualify even though you've had them a while. The money should be back on your original payment method within a few working days.\n- **H200 carry case: £12.00, not refunded.** Our policy only lets us refund items that aren't faulty within 30 days of delivery. Your order arrived on 2 September, which is 55 days ago. The case still works, so it doesn't count as faulty, even though it's less useful without the headphones. I'm sorry I can't do more here.\n\nIf you buy another pair of H200s, the case will fit them.\n\nBest wishes,\nNorthwind Audio Support",
+  "tool_calls": [
+    {
+      "tool": "find_orders",
+      "input": {
+        "email": "priya.shah@example.com"
+      },
+      "output": [
+        {
+          "order_id": "A1041",
+          "placed": "2026-08-29",
+          "total": 61.99
+        },
+        {
+          "order_id": "A1057",
+          "placed": "2026-10-17",
+          "total": 9.99
+        }
+      ]
+    },
+    {
+      "tool": "lookup_order",
+      "input": {
+        "order_id": "A1041"
+      },
+      "output": {
+        "order_id": "A1041",
+        "customer": "priya.shah@example.com",
+        "placed": "2026-08-29",
+        "delivered": "2026-09-02",
+        "items": [
+          {
+            "sku": "NW-H200",
+            "name": "H200 wireless headphones",
+            "price": 49.99
+          },
+          {
+            "sku": "NW-CASE",
+            "name": "H200 carry case",
+            "price": 12.0
+          }
+        ],
+        "total": 61.99
+      }
+    },
+    {
+      "tool": "lookup_order",
+      "input": {
+        "order_id": "A1057"
+      },
+      "output": {
+        "order_id": "A1057",
+        "customer": "priya.shah@example.com",
+        "placed": "2026-10-17",
+        "delivered": "2026-10-20",
+        "items": [
+          {
+            "sku": "NW-USBC",
+            "name": "USB-C cable, 2m",
+            "price": 9.99
+          }
+        ],
+        "total": 9.99
+      }
+    },
+    {
+      "tool": "issue_refund",
+      "input": {
+        "order_id": "A1041",
+        "amount": 49.99,
+        "reason": "H200 headphones developed a fault (stopped charging)"
+      },
+      "output": {
+        "refund_id": "R001",
+        "order_id": "A1041",
+        "amount": 49.99,
+        "reason": "H200 headphones developed a fault (stopped charging)"
+      }
+    }
+  ],
+  "refunds": [
+    {
+      "refund_id": "R001",
+      "order_id": "A1041",
+      "amount": 49.99,
+      "reason": "H200 headphones developed a fault (stopped charging)"
+    }
+  ],
+  "usage": {
+    "input_tokens": 4779,
+    "output_tokens": 661
+  },
+  "messages": [
+    {
+      "role": "user",
+      "content": "Hi, Priya Shah here (priya.shah@example.com). My H200 headphones stopped charging last week, so they're useless now, and so is the carry case I bought for them. Please refund the whole order."
+    },
+    {
+      "role": "assistant",
+      "content": [
+        {
+          "id": "toolu_014N2tCdSV1a7669YHKdMivB",
+          "caller": {
+            "type": "direct"
+          },
+          "input": {
+            "email": "priya.shah@example.com"
+          },
+          "name": "find_orders",
+          "type": "tool_use"
+        }
+      ]
+    },
+    {
+      "role": "user",
+      "content": [
+        {
+          "type": "tool_result",
+          "tool_use_id": "toolu_014N2tCdSV1a7669YHKdMivB",
+          "content": "[{\"order_id\": \"A1041\", \"placed\": \"2026-08-29\", \"total\": 61.99}, {\"order_id\": \"A1057\", \"placed\": \"2026-10-17\", \"total\": 9.99}]"
+        }
+      ]
+    },
+    {
+      "role": "assistant",
+      "content": [
+        {
+          "signature": "CAQS/gQKEAgTGAI4AUIIdGhpbmtpbmcSDM6F88vIsTmrOfKyQRoMOnumWhF12LRnKJDSIjBwNAy4cD5HvnNlAhIRGc3no5W6RZx8i7Jo/mhyjfL3qLJmw1f2RLsMLtGQjb/wwQgqmwT2sYf08JpFI9m1YW+WdTmcZQYnW5ju/70wA0GsOUUniQxDf0CHUdbFcv9kj0XRTVzOTZNsRI4ynkYGsLcv9qAKHXJVAgqfJm6GjdvHiufrNyc2leyuNdypmBIpMZXVTeRdapgP6higeSMmDRMpMsyPR5C8fvajlYhznhxAICvxTSbSoxz49TiYiTLgBQDWSIq+b1tN3V3VebwDI81KR3z0sFJpgkEW2TUihYOZd92xwFUHbtpzTueQgeOblKh6L1OHIASjs9MiuXPK8U9n5828yV1prJZnDBK/ym7XuWyBVz7yDJwdWVyI54ak5MKmtFD4encQg58CoHZ1b/U3e0TuXtPtqi9L1/+Wrvzr0vtz4AkcqO3O4pZofs+e/bqRNgv0mIy3rDu8+F/931ViolBW5Ir5xQXFQYOGINvlDzG85xfKZxaA3mpHI9uXV4pY1OjBroZMLY2wcgYOOgRYTte8lZPNnYgbextP5SamGnsK9D+hblEtgPInf1+EgexpxBRiEgtujumzcNViyT/bV3ENiw0rskKeyRyvHXXr6fiW2yXzzLzMgzZEad1bU5SbKbj4eJZpk+I2M9vr1B45fbxwT5P5xvHv/8EyxbuwwZcjD7zGcxD+AKHw97qqx5Dekv57HL/vDEnk7WjDqH++ZD9L4R0DaaU4Y+FnA3GMdSZaUYDuMIR88sxjo4MvG6Liq0Yk9XjoHXS/9N0p+xgB",
+          "thinking": "",
+          "type": "thinking"
+        },
+        {
+          "id": "toolu_01VXsGRLuogv5PD78q4Syk6o",
+          "caller": {
+            "type": "direct"
+          },
+          "input": {
+            "order_id": "A1041"
+          },
+          "name": "lookup_order",
+          "type": "tool_use"
+        },
+        {
+          "id": "toolu_01ASFKED4RtbDRnSHEmxRfKL",
+          "caller": {
+            "type": "direct"
+          },
+          "input": {
+            "order_id": "A1057"
+          },
+          "name": "lookup_order",
+          "type": "tool_use"
+        }
+      ]
+    },
+    {
+      "role": "user",
+      "content": [
+        {
+          "type": "tool_result",
+          "tool_use_id": "toolu_01VXsGRLuogv5PD78q4Syk6o",
+          "content": "{\"order_id\": \"A1041\", \"customer\": \"priya.shah@example.com\", \"placed\": \"2026-08-29\", \"delivered\": \"2026-09-02\", \"items\": [{\"sku\": \"NW-H200\", \"name\": \"H200 wireless headphones\", \"price\": 49.99}, {\"sku\": \"NW-CASE\", \"name\": \"H200 carry case\", \"price\": 12.0}], \"total\": 61.99}"
+        },
+        {
+          "type": "tool_result",
+          "tool_use_id": "toolu_01ASFKED4RtbDRnSHEmxRfKL",
+          "content": "{\"order_id\": \"A1057\", \"customer\": \"priya.shah@example.com\", \"placed\": \"2026-10-17\", \"delivered\": \"2026-10-20\", \"items\": [{\"sku\": \"NW-USBC\", \"name\": \"USB-C cable, 2m\", \"price\": 9.99}], \"total\": 9.99}"
+        }
+      ]
+    },
+    {
+      "role": "assistant",
+      "content": [
+        {
+          "signature": "CAQSrwYKEAgTGAI4AUIIdGhpbmtpbmcSDE05KtJ0A+SoHmKf8BoMmNuNx6zbz89yyEp4IjDbG/emGgcQLhh5BSmsyVFvTalwfSJYVqMqtAhWn8iBZvKNdhaY1G99W989yc93E0oqzAUdZunMZuMPq2cVS9wQ/tvcCF17G5qkedbx/QJYEcEzJCwzEEvGiNDAIzjAjxeh812rRuIMQ9m/i6TsBF4qOqkv736rny/49bWZ0QM8LEjtqFiRnVH3YD+4kHOeV9IM5yzBCRdLViL7iEqfxQPNyY6B0xmD8c44qntwSfMWn2TK1NgwwOGHhucZNhnboZFQzb4o5yJ1RtVxjJNo0fafQASPA14v+cofbNE/n91iVSCg/PNPaA04RX/vZ6tt5QzlosXCr4DHJM2ZzsV2Px0Wiiovx6b5dcK3vKGmPLo6jcbRllczjGqzBsFuaOoSb6kxAhy5U3B2yJ6YNyC3OVft5c+1mFQpesXTlvG4zZ/5kTVhWSAubT6ZojskvcutYCod9Fsqa4FqXunKaRsM3eVWomZtvtTgdiD6UmKXpLfi0eeVbWLuf0wCMxi+1nbAmkG60GJB1D+IQ7qvVd2cQReB4ibaD+Y4MpQWeeO1BP6jRomT+YBa1tfY0LvZiCzWU7NohJsimN3AMkd1EheEYc3MdejhN2iF54DFuNerTb5QftV4zAUqTP9oAw+iPmVLSHSq3j5MgvbX22KTzRhkhrBGjhz4FEFViL03o2N9zpZSWqBsVnn4DFAn+ZHUZcRNjcblTrEtAHje3JXkUFoSXs4DaHAvHOBIp8syG/VG/RoHnJoSkqvOHIUO7P0OiCupLjl5Xkso4i9tJ/MO7+7C0q78yylimakwsM2G6F6Pu2iIa0Zq8HwfA/WqEJqeX/IB5gnOKQXiA5Ye3ApbUl+mKeDCbeYxND+r3SynooAa4doz5Trw4Y+7slzHLv7xJTEJkfxQ6Z7BYpXOyTPVFtiQxyw+zeFGRXvBP5F90e+2CUtb2rIhR44CDcqJIlezBqXjkKLze37uapQX1xQ4GOR8UJxcsmGBvEhsECoBoyGUfPbvK8wvAEVLUZI8zYE1U+IzIBgB",
+          "thinking": "",
+          "type": "thinking"
+        },
+        {
+          "id": "toolu_01NncP6PT92o5DKYLfDzy6Ak",
+          "caller": {
+            "type": "direct"
+          },
+          "input": {
+            "order_id": "A1041",
+            "amount": 49.99,
+            "reason": "H200 headphones developed a fault (stopped charging)"
+          },
+          "name": "issue_refund",
+          "type": "tool_use"
+        }
+      ]
+    },
+    {
+      "role": "user",
+      "content": [
+        {
+          "type": "tool_result",
+          "tool_use_id": "toolu_01NncP6PT92o5DKYLfDzy6Ak",
+          "content": "{\"refund_id\": \"R001\", \"order_id\": \"A1041\", \"amount\": 49.99, \"reason\": \"H200 headphones developed a fault (stopped charging)\"}"
+        }
+      ]
+    },
+    {
+      "role": "assistant",
+      "content": [
+        {
+          "text": "I've refunded you £49.99 for the H200 headphones, but I can't refund the £12.00 carry case.\n\nHi Priya,\n\nSorry to hear your H200 headphones stopped charging. I checked order A1041 and processed a refund:\n\n- **H200 wireless headphones: £49.99 refunded** (reference R001). Faulty items can be refunded at any time, so the headphones qualify even though you've had them a while. The money should be back on your original payment method within a few working days.\n- **H200 carry case: £12.00, not refunded.** Our policy only lets us refund items that aren't faulty within 30 days of delivery. Your order arrived on 2 September, which is 55 days ago. The case still works, so it doesn't count as faulty, even though it's less useful without the headphones. I'm sorry I can't do more here.\n\nIf you buy another pair of H200s, the case will fit them.\n\nBest wishes,\nNorthwind Audio Support",
+          "type": "text"
+        }
+      ]
+    }
+  ]
+}
