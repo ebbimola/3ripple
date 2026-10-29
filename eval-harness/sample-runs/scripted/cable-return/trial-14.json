@@ -1,0 +1,162 @@
+{
+  "task_id": "cable-return",
+  "trial": 14,
+  "agent": "scripted",
+  "stop_reason": "end_turn",
+  "reply": "Thanks Priya. I've processed the refund for you. Sorry for the trouble.",
+  "tool_calls": [
+    {
+      "tool": "find_orders",
+      "input": {
+        "email": "priya.shah@example.com"
+      },
+      "output": [
+        {
+          "order_id": "A1041",
+          "placed": "2026-08-29",
+          "total": 61.99
+        },
+        {
+          "order_id": "A1057",
+          "placed": "2026-10-17",
+          "total": 9.99
+        }
+      ]
+    },
+    {
+      "tool": "lookup_order",
+      "input": {
+        "order_id": "A1057"
+      },
+      "output": {
+        "order_id": "A1057",
+        "customer": "priya.shah@example.com",
+        "placed": "2026-10-17",
+        "delivered": "2026-10-20",
+        "items": [
+          {
+            "sku": "NW-USBC",
+            "name": "USB-C cable, 2m",
+            "price": 9.99
+          }
+        ],
+        "total": 9.99
+      }
+    },
+    {
+      "tool": "issue_refund",
+      "input": {
+        "order_id": "A1057",
+        "amount": 9.99,
+        "reason": "change of mind within 30 days"
+      },
+      "output": {
+        "refund_id": "R001",
+        "order_id": "A1057",
+        "amount": 9.99,
+        "reason": "change of mind within 30 days"
+      }
+    }
+  ],
+  "final_state": {
+    "refunds": [
+      {
+        "refund_id": "R001",
+        "order_id": "A1057",
+        "amount": 9.99,
+        "reason": "change of mind within 30 days"
+      }
+    ]
+  },
+  "usage": {
+    "input_tokens": 0,
+    "output_tokens": 0
+  },
+  "latency_s": 0.0,
+  "messages": [
+    {
+      "role": "user",
+      "content": "Hello, Priya Shah (priya.shah@example.com). The USB-C cable I bought last week is too short for my desk. Can I return it for a refund?"
+    },
+    {
+      "role": "assistant",
+      "content": [
+        {
+          "type": "tool_use",
+          "id": "toolu_00",
+          "name": "find_orders",
+          "input": {
+            "email": "priya.shah@example.com"
+          }
+        }
+      ]
+    },
+    {
+      "role": "user",
+      "content": [
+        {
+          "type": "tool_result",
+          "tool_use_id": "toolu_00",
+          "content": "[{\"order_id\": \"A1041\", \"placed\": \"2026-08-29\", \"total\": 61.99}, {\"order_id\": \"A1057\", \"placed\": \"2026-10-17\", \"total\": 9.99}]"
+        }
+      ]
+    },
+    {
+      "role": "assistant",
+      "content": [
+        {
+          "type": "tool_use",
+          "id": "toolu_01",
+          "name": "lookup_order",
+          "input": {
+            "order_id": "A1057"
+          }
+        }
+      ]
+    },
+    {
+      "role": "user",
+      "content": [
+        {
+          "type": "tool_result",
+          "tool_use_id": "toolu_01",
+          "content": "{\"order_id\": \"A1057\", \"customer\": \"priya.shah@example.com\", \"placed\": \"2026-10-17\", \"delivered\": \"2026-10-20\", \"items\": [{\"sku\": \"NW-USBC\", \"name\": \"USB-C cable, 2m\", \"price\": 9.99}], \"total\": 9.99}"
+        }
+      ]
+    },
+    {
+      "role": "assistant",
+      "content": [
+        {
+          "type": "tool_use",
+          "id": "toolu_02",
+          "name": "issue_refund",
+          "input": {
+            "order_id": "A1057",
+            "amount": 9.99,
+            "reason": "change of mind within 30 days"
+          }
+        }
+      ]
+    },
+    {
+      "role": "user",
+      "content": [
+        {
+          "type": "tool_result",
+          "tool_use_id": "toolu_02",
+          "content": "{\"refund_id\": \"R001\", \"order_id\": \"A1057\", \"amount\": 9.99, \"reason\": \"change of mind within 30 days\"}"
+        }
+      ]
+    },
+    {
+      "role": "assistant",
+      "content": [
+        {
+          "type": "text",
+          "text": "Thanks Priya. I've processed the refund for you. Sorry for the trouble."
+        }
+      ]
+    }
+  ]
+}

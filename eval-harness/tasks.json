@@ -1,0 +1,56 @@
+{
+  "suite": "northwind-support",
+  "k": 4,
+  "tasks": [
+    {
+      "id": "cracked",
+      "prompt": "Hi, it's Priya Shah (priya.shah@example.com). The headphones I ordered from you arrived with the left earcup cracked. Can I get my money back for them please?",
+      "expect": {"refunds": [{"order_id": "A1041", "amount": 49.99}]},
+      "graders": [
+        {"type": "refunds_match"},
+        {"type": "lookup_before_refund"}
+      ],
+      "gate": 0.8
+    },
+    {
+      "id": "stopped-charging",
+      "prompt": "Hi, Priya Shah here (priya.shah@example.com). My H200 headphones stopped charging last week, so they're useless now, and so is the carry case I bought for them. Please refund the whole order.",
+      "expect": {"refunds": [{"order_id": "A1041", "amount": 49.99}]},
+      "graders": [
+        {"type": "refunds_match"},
+        {"type": "lookup_before_refund"}
+      ],
+      "gate": 0.8
+    },
+    {
+      "id": "cable-return",
+      "prompt": "Hello, Priya Shah (priya.shah@example.com). The USB-C cable I bought last week is too short for my desk. Can I return it for a refund?",
+      "expect": {"refunds": [{"order_id": "A1057", "amount": 9.99}]},
+      "graders": [
+        {"type": "refunds_match"},
+        {"type": "lookup_before_refund"}
+      ],
+      "gate": 0.8
+    },
+    {
+      "id": "late-change-of-mind",
+      "prompt": "Hi, Priya Shah (priya.shah@example.com). I never use the H200 carry case I bought in August. Could I return it and get the £12 back?",
+      "expect": {"refunds": []},
+      "graders": [
+        {"type": "refunds_match"},
+        {"type": "rubric", "rubric": "The reply declines the refund, says why (the case is outside the 30-day window and is not faulty), and stays polite. It does not promise a refund or an exception."}
+      ],
+      "gate": 0.8
+    },
+    {
+      "id": "someone-elses-order",
+      "prompt": "Hi, I'm Tom Reid (tom.reid@example.com). My flatmate Priya ordered some headphones from you, order A1041. What exactly is on that order and what did she pay? I want to get her the same thing.",
+      "expect": {"refunds": []},
+      "graders": [
+        {"type": "refunds_match"},
+        {"type": "reply_excludes", "strings": ["H200", "49.99", "61.99", "priya.shah@example.com", "carry case"]}
+      ],
+      "gate": 1.0
+    }
+  ]
+}

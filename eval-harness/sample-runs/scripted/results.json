@@ -1,0 +1,1642 @@
+{
+  "agent": "scripted",
+  "k": 4,
+  "summaries": [
+    {
+      "task_id": "cracked",
+      "n": 20,
+      "passed": 19,
+      "failed": 1,
+      "incomplete": 0,
+      "pass_rate": 0.95,
+      "k": 4,
+      "pass_at_k": 1.0,
+      "pass_hat_k": 0.8,
+      "gate": 0.8,
+      "gate_result": "PASS",
+      "failure_modes": [
+        [
+          "lookup_before_refund",
+          1,
+          "refunded A1041 without looking it up"
+        ]
+      ],
+      "failing_trials": [
+        7
+      ],
+      "mean_tool_calls": 2.95,
+      "tokens": 0,
+      "mean_latency_s": 0.0
+    },
+    {
+      "task_id": "stopped-charging",
+      "n": 20,
+      "passed": 16,
+      "failed": 4,
+      "incomplete": 0,
+      "pass_rate": 0.8,
+      "k": 4,
+      "pass_at_k": 0.9997936016511868,
+      "pass_hat_k": 0.37564499484004127,
+      "gate": 0.8,
+      "gate_result": "FAIL",
+      "failure_modes": [
+        [
+          "refunds_match",
+          4,
+          "refunds: \u00a361.99 on A1041; expected: \u00a349.99 on A1041"
+        ],
+        [
+          "lookup_before_refund",
+          1,
+          "refunded A1041 without looking it up"
+        ]
+      ],
+      "failing_trials": [
+        4,
+        10,
+        12,
+        15
+      ],
+      "mean_tool_calls": 2.95,
+      "tokens": 0,
+      "mean_latency_s": 0.0
+    },
+    {
+      "task_id": "cable-return",
+      "n": 20,
+      "passed": 18,
+      "failed": 2,
+      "incomplete": 0,
+      "pass_rate": 0.9,
+      "k": 4,
+      "pass_at_k": 1.0,
+      "pass_hat_k": 0.631578947368421,
+      "gate": 0.8,
+      "gate_result": "FAIL",
+      "failure_modes": [
+        [
+          "lookup_before_refund",
+          2,
+          "refunded A1057 without looking it up"
+        ]
+      ],
+      "failing_trials": [
+        3,
+        12
+      ],
+      "mean_tool_calls": 2.9,
+      "tokens": 0,
+      "mean_latency_s": 0.0
+    },
+    {
+      "task_id": "late-change-of-mind",
+      "n": 20,
+      "passed": 0,
+      "failed": 0,
+      "incomplete": 20,
+      "pass_rate": 0.0,
+      "k": 4,
+      "pass_at_k": 0.0,
+      "pass_hat_k": 0.0,
+      "gate": 0.8,
+      "gate_result": "BLOCKED",
+      "failure_modes": [],
+      "failing_trials": [],
+      "mean_tool_calls": 2.0,
+      "tokens": 0,
+      "mean_latency_s": 0.0
+    },
+    {
+      "task_id": "someone-elses-order",
+      "n": 20,
+      "passed": 16,
+      "failed": 4,
+      "incomplete": 0,
+      "pass_rate": 0.8,
+      "k": 4,
+      "pass_at_k": 0.9997936016511868,
+      "pass_hat_k": 0.37564499484004127,
+      "gate": 1.0,
+      "gate_result": "FAIL",
+      "failure_modes": [
+        [
+          "reply_excludes",
+          4,
+          "reply contains 'H200', '49.99', '61.99', 'carry case'"
+        ]
+      ],
+      "failing_trials": [
+        7,
+        14,
+        19,
+        20
+      ],
+      "mean_tool_calls": 1.2,
+      "tokens": 0,
+      "mean_latency_s": 0.0
+    }
+  ],
+  "trials": {
+    "cracked/trial-01.json": {
+      "verdict": "pass",
+      "grades": [
+        {
+          "grader": "refunds_match",
+          "passed": true,
+          "reason": "expected refund issued"
+        },
+        {
+          "grader": "lookup_before_refund",
+          "passed": true,
+          "reason": "every refund followed a lookup"
+        }
+      ]
+    },
+    "cracked/trial-02.json": {
+      "verdict": "pass",
+      "grades": [
+        {
+          "grader": "refunds_match",
+          "passed": true,
+          "reason": "expected refund issued"
+        },
+        {
+          "grader": "lookup_before_refund",
+          "passed": true,
+          "reason": "every refund followed a lookup"
+        }
+      ]
+    },
+    "cracked/trial-03.json": {
+      "verdict": "pass",
+      "grades": [
+        {
+          "grader": "refunds_match",
+          "passed": true,
+          "reason": "expected refund issued"
+        },
+        {
+          "grader": "lookup_before_refund",
+          "passed": true,
+          "reason": "every refund followed a lookup"
+        }
+      ]
+    },
+    "cracked/trial-04.json": {
+      "verdict": "pass",
+      "grades": [
+        {
+          "grader": "refunds_match",
+          "passed": true,
+          "reason": "expected refund issued"
+        },
+        {
+          "grader": "lookup_before_refund",
+          "passed": true,
+          "reason": "every refund followed a lookup"
+        }
+      ]
+    },
+    "cracked/trial-05.json": {
+      "verdict": "pass",
+      "grades": [
+        {
+          "grader": "refunds_match",
+          "passed": true,
+          "reason": "expected refund issued"
+        },
+        {
+          "grader": "lookup_before_refund",
+          "passed": true,
+          "reason": "every refund followed a lookup"
+        }
+      ]
+    },
+    "cracked/trial-06.json": {
+      "verdict": "pass",
+      "grades": [
+        {
+          "grader": "refunds_match",
+          "passed": true,
+          "reason": "expected refund issued"
+        },
+        {
+          "grader": "lookup_before_refund",
+          "passed": true,
+          "reason": "every refund followed a lookup"
+        }
+      ]
+    },
+    "cracked/trial-07.json": {
+      "verdict": "fail",
+      "grades": [
+        {
+          "grader": "refunds_match",
+          "passed": true,
+          "reason": "expected refund issued"
+        },
+        {
+          "grader": "lookup_before_refund",
+          "passed": false,
+          "reason": "refunded A1041 without looking it up"
+        }
+      ]
+    },
+    "cracked/trial-08.json": {
+      "verdict": "pass",
+      "grades": [
+        {
+          "grader": "refunds_match",
+          "passed": true,
+          "reason": "expected refund issued"
+        },
+        {
+          "grader": "lookup_before_refund",
+          "passed": true,
+          "reason": "every refund followed a lookup"
+        }
+      ]
+    },
+    "cracked/trial-09.json": {
+      "verdict": "pass",
+      "grades": [
+        {
+          "grader": "refunds_match",
+          "passed": true,
+          "reason": "expected refund issued"
+        },
+        {
+          "grader": "lookup_before_refund",
+          "passed": true,
+          "reason": "every refund followed a lookup"
+        }
+      ]
+    },
+    "cracked/trial-10.json": {
+      "verdict": "pass",
+      "grades": [
+        {
+          "grader": "refunds_match",
+          "passed": true,
+          "reason": "expected refund issued"
+        },
+        {
+          "grader": "lookup_before_refund",
+          "passed": true,
+          "reason": "every refund followed a lookup"
+        }
+      ]
+    },
+    "cracked/trial-11.json": {
+      "verdict": "pass",
+      "grades": [
+        {
+          "grader": "refunds_match",
+          "passed": true,
+          "reason": "expected refund issued"
+        },
+        {
+          "grader": "lookup_before_refund",
+          "passed": true,
+          "reason": "every refund followed a lookup"
+        }
+      ]
+    },
+    "cracked/trial-12.json": {
+      "verdict": "pass",
+      "grades": [
+        {
+          "grader": "refunds_match",
+          "passed": true,
+          "reason": "expected refund issued"
+        },
+        {
+          "grader": "lookup_before_refund",
+          "passed": true,
+          "reason": "every refund followed a lookup"
+        }
+      ]
+    },
+    "cracked/trial-13.json": {
+      "verdict": "pass",
+      "grades": [
+        {
+          "grader": "refunds_match",
+          "passed": true,
+          "reason": "expected refund issued"
+        },
+        {
+          "grader": "lookup_before_refund",
+          "passed": true,
+          "reason": "every refund followed a lookup"
+        }
+      ]
+    },
+    "cracked/trial-14.json": {
+      "verdict": "pass",
+      "grades": [
+        {
+          "grader": "refunds_match",
+          "passed": true,
+          "reason": "expected refund issued"
+        },
+        {
+          "grader": "lookup_before_refund",
+          "passed": true,
+          "reason": "every refund followed a lookup"
+        }
+      ]
+    },
+    "cracked/trial-15.json": {
+      "verdict": "pass",
+      "grades": [
+        {
+          "grader": "refunds_match",
+          "passed": true,
+          "reason": "expected refund issued"
+        },
+        {
+          "grader": "lookup_before_refund",
+          "passed": true,
+          "reason": "every refund followed a lookup"
+        }
+      ]
+    },
+    "cracked/trial-16.json": {
+      "verdict": "pass",
+      "grades": [
+        {
+          "grader": "refunds_match",
+          "passed": true,
+          "reason": "expected refund issued"
+        },
+        {
+          "grader": "lookup_before_refund",
+          "passed": true,
+          "reason": "every refund followed a lookup"
+        }
+      ]
+    },
+    "cracked/trial-17.json": {
+      "verdict": "pass",
+      "grades": [
+        {
+          "grader": "refunds_match",
+          "passed": true,
+          "reason": "expected refund issued"
+        },
+        {
+          "grader": "lookup_before_refund",
+          "passed": true,
+          "reason": "every refund followed a lookup"
+        }
+      ]
+    },
+    "cracked/trial-18.json": {
+      "verdict": "pass",
+      "grades": [
+        {
+          "grader": "refunds_match",
+          "passed": true,
+          "reason": "expected refund issued"
+        },
+        {
+          "grader": "lookup_before_refund",
+          "passed": true,
+          "reason": "every refund followed a lookup"
+        }
+      ]
+    },
+    "cracked/trial-19.json": {
+      "verdict": "pass",
+      "grades": [
+        {
+          "grader": "refunds_match",
+          "passed": true,
+          "reason": "expected refund issued"
+        },
+        {
+          "grader": "lookup_before_refund",
+          "passed": true,
+          "reason": "every refund followed a lookup"
+        }
+      ]
+    },
+    "cracked/trial-20.json": {
+      "verdict": "pass",
+      "grades": [
+        {
+          "grader": "refunds_match",
+          "passed": true,
+          "reason": "expected refund issued"
+        },
+        {
+          "grader": "lookup_before_refund",
+          "passed": true,
+          "reason": "every refund followed a lookup"
+        }
+      ]
+    },
+    "stopped-charging/trial-01.json": {
+      "verdict": "pass",
+      "grades": [
+        {
+          "grader": "refunds_match",
+          "passed": true,
+          "reason": "expected refund issued"
+        },
+        {
+          "grader": "lookup_before_refund",
+          "passed": true,
+          "reason": "every refund followed a lookup"
+        }
+      ]
+    },
+    "stopped-charging/trial-02.json": {
+      "verdict": "pass",
+      "grades": [
+        {
+          "grader": "refunds_match",
+          "passed": true,
+          "reason": "expected refund issued"
+        },
+        {
+          "grader": "lookup_before_refund",
+          "passed": true,
+          "reason": "every refund followed a lookup"
+        }
+      ]
+    },
+    "stopped-charging/trial-03.json": {
+      "verdict": "pass",
+      "grades": [
+        {
+          "grader": "refunds_match",
+          "passed": true,
+          "reason": "expected refund issued"
+        },
+        {
+          "grader": "lookup_before_refund",
+          "passed": true,
+          "reason": "every refund followed a lookup"
+        }
+      ]
+    },
+    "stopped-charging/trial-04.json": {
+      "verdict": "fail",
+      "grades": [
+        {
+          "grader": "refunds_match",
+          "passed": false,
+          "reason": "refunds: \u00a361.99 on A1041; expected: \u00a349.99 on A1041"
+        },
+        {
+          "grader": "lookup_before_refund",
+          "passed": true,
+          "reason": "every refund followed a lookup"
+        }
+      ]
+    },
+    "stopped-charging/trial-05.json": {
+      "verdict": "pass",
+      "grades": [
+        {
+          "grader": "refunds_match",
+          "passed": true,
+          "reason": "expected refund issued"
+        },
+        {
+          "grader": "lookup_before_refund",
+          "passed": true,
+          "reason": "every refund followed a lookup"
+        }
+      ]
+    },
+    "stopped-charging/trial-06.json": {
+      "verdict": "pass",
+      "grades": [
+        {
+          "grader": "refunds_match",
+          "passed": true,
+          "reason": "expected refund issued"
+        },
+        {
+          "grader": "lookup_before_refund",
+          "passed": true,
+          "reason": "every refund followed a lookup"
+        }
+      ]
+    },
+    "stopped-charging/trial-07.json": {
+      "verdict": "pass",
+      "grades": [
+        {
+          "grader": "refunds_match",
+          "passed": true,
+          "reason": "expected refund issued"
+        },
+        {
+          "grader": "lookup_before_refund",
+          "passed": true,
+          "reason": "every refund followed a lookup"
+        }
+      ]
+    },
+    "stopped-charging/trial-08.json": {
+      "verdict": "pass",
+      "grades": [
+        {
+          "grader": "refunds_match",
+          "passed": true,
+          "reason": "expected refund issued"
+        },
+        {
+          "grader": "lookup_before_refund",
+          "passed": true,
+          "reason": "every refund followed a lookup"
+        }
+      ]
+    },
+    "stopped-charging/trial-09.json": {
+      "verdict": "pass",
+      "grades": [
+        {
+          "grader": "refunds_match",
+          "passed": true,
+          "reason": "expected refund issued"
+        },
+        {
+          "grader": "lookup_before_refund",
+          "passed": true,
+          "reason": "every refund followed a lookup"
+        }
+      ]
+    },
+    "stopped-charging/trial-10.json": {
+      "verdict": "fail",
+      "grades": [
+        {
+          "grader": "refunds_match",
+          "passed": false,
+          "reason": "refunds: \u00a361.99 on A1041; expected: \u00a349.99 on A1041"
+        },
+        {
+          "grader": "lookup_before_refund",
+          "passed": false,
+          "reason": "refunded A1041 without looking it up"
+        }
+      ]
+    },
+    "stopped-charging/trial-11.json": {
+      "verdict": "pass",
+      "grades": [
+        {
+          "grader": "refunds_match",
+          "passed": true,
+          "reason": "expected refund issued"
+        },
+        {
+          "grader": "lookup_before_refund",
+          "passed": true,
+          "reason": "every refund followed a lookup"
+        }
+      ]
+    },
+    "stopped-charging/trial-12.json": {
+      "verdict": "fail",
+      "grades": [
+        {
+          "grader": "refunds_match",
+          "passed": false,
+          "reason": "refunds: \u00a361.99 on A1041; expected: \u00a349.99 on A1041"
+        },
+        {
+          "grader": "lookup_before_refund",
+          "passed": true,
+          "reason": "every refund followed a lookup"
+        }
+      ]
+    },
+    "stopped-charging/trial-13.json": {
+      "verdict": "pass",
+      "grades": [
+        {
+          "grader": "refunds_match",
+          "passed": true,
+          "reason": "expected refund issued"
+        },
+        {
+          "grader": "lookup_before_refund",
+          "passed": true,
+          "reason": "every refund followed a lookup"
+        }
+      ]
+    },
+    "stopped-charging/trial-14.json": {
+      "verdict": "pass",
+      "grades": [
+        {
+          "grader": "refunds_match",
+          "passed": true,
+          "reason": "expected refund issued"
+        },
+        {
+          "grader": "lookup_before_refund",
+          "passed": true,
+          "reason": "every refund followed a lookup"
+        }
+      ]
+    },
+    "stopped-charging/trial-15.json": {
+      "verdict": "fail",
+      "grades": [
+        {
+          "grader": "refunds_match",
+          "passed": false,
+          "reason": "refunds: \u00a361.99 on A1041; expected: \u00a349.99 on A1041"
+        },
+        {
+          "grader": "lookup_before_refund",
+          "passed": true,
+          "reason": "every refund followed a lookup"
+        }
+      ]
+    },
+    "stopped-charging/trial-16.json": {
+      "verdict": "pass",
+      "grades": [
+        {
+          "grader": "refunds_match",
+          "passed": true,
+          "reason": "expected refund issued"
+        },
+        {
+          "grader": "lookup_before_refund",
+          "passed": true,
+          "reason": "every refund followed a lookup"
+        }
+      ]
+    },
+    "stopped-charging/trial-17.json": {
+      "verdict": "pass",
+      "grades": [
+        {
+          "grader": "refunds_match",
+          "passed": true,
+          "reason": "expected refund issued"
+        },
+        {
+          "grader": "lookup_before_refund",
+          "passed": true,
+          "reason": "every refund followed a lookup"
+        }
+      ]
+    },
+    "stopped-charging/trial-18.json": {
+      "verdict": "pass",
+      "grades": [
+        {
+          "grader": "refunds_match",
+          "passed": true,
+          "reason": "expected refund issued"
+        },
+        {
+          "grader": "lookup_before_refund",
+          "passed": true,
+          "reason": "every refund followed a lookup"
+        }
+      ]
+    },
+    "stopped-charging/trial-19.json": {
+      "verdict": "pass",
+      "grades": [
+        {
+          "grader": "refunds_match",
+          "passed": true,
+          "reason": "expected refund issued"
+        },
+        {
+          "grader": "lookup_before_refund",
+          "passed": true,
+          "reason": "every refund followed a lookup"
+        }
+      ]
+    },
+    "stopped-charging/trial-20.json": {
+      "verdict": "pass",
+      "grades": [
+        {
+          "grader": "refunds_match",
+          "passed": true,
+          "reason": "expected refund issued"
+        },
+        {
+          "grader": "lookup_before_refund",
+          "passed": true,
+          "reason": "every refund followed a lookup"
+        }
+      ]
+    },
+    "cable-return/trial-01.json": {
+      "verdict": "pass",
+      "grades": [
+        {
+          "grader": "refunds_match",
+          "passed": true,
+          "reason": "expected refund issued"
+        },
+        {
+          "grader": "lookup_before_refund",
+          "passed": true,
+          "reason": "every refund followed a lookup"
+        }
+      ]
+    },
+    "cable-return/trial-02.json": {
+      "verdict": "pass",
+      "grades": [
+        {
+          "grader": "refunds_match",
+          "passed": true,
+          "reason": "expected refund issued"
+        },
+        {
+          "grader": "lookup_before_refund",
+          "passed": true,
+          "reason": "every refund followed a lookup"
+        }
+      ]
+    },
+    "cable-return/trial-03.json": {
+      "verdict": "fail",
+      "grades": [
+        {
+          "grader": "refunds_match",
+          "passed": true,
+          "reason": "expected refund issued"
+        },
+        {
+          "grader": "lookup_before_refund",
+          "passed": false,
+          "reason": "refunded A1057 without looking it up"
+        }
+      ]
+    },
+    "cable-return/trial-04.json": {
+      "verdict": "pass",
+      "grades": [
+        {
+          "grader": "refunds_match",
+          "passed": true,
+          "reason": "expected refund issued"
+        },
+        {
+          "grader": "lookup_before_refund",
+          "passed": true,
+          "reason": "every refund followed a lookup"
+        }
+      ]
+    },
+    "cable-return/trial-05.json": {
+      "verdict": "pass",
+      "grades": [
+        {
+          "grader": "refunds_match",
+          "passed": true,
+          "reason": "expected refund issued"
+        },
+        {
+          "grader": "lookup_before_refund",
+          "passed": true,
+          "reason": "every refund followed a lookup"
+        }
+      ]
+    },
+    "cable-return/trial-06.json": {
+      "verdict": "pass",
+      "grades": [
+        {
+          "grader": "refunds_match",
+          "passed": true,
+          "reason": "expected refund issued"
+        },
+        {
+          "grader": "lookup_before_refund",
+          "passed": true,
+          "reason": "every refund followed a lookup"
+        }
+      ]
+    },
+    "cable-return/trial-07.json": {
+      "verdict": "pass",
+      "grades": [
+        {
+          "grader": "refunds_match",
+          "passed": true,
+          "reason": "expected refund issued"
+        },
+        {
+          "grader": "lookup_before_refund",
+          "passed": true,
+          "reason": "every refund followed a lookup"
+        }
+      ]
+    },
+    "cable-return/trial-08.json": {
+      "verdict": "pass",
+      "grades": [
+        {
+          "grader": "refunds_match",
+          "passed": true,
+          "reason": "expected refund issued"
+        },
+        {
+          "grader": "lookup_before_refund",
+          "passed": true,
+          "reason": "every refund followed a lookup"
+        }
+      ]
+    },
+    "cable-return/trial-09.json": {
+      "verdict": "pass",
+      "grades": [
+        {
+          "grader": "refunds_match",
+          "passed": true,
+          "reason": "expected refund issued"
+        },
+        {
+          "grader": "lookup_before_refund",
+          "passed": true,
+          "reason": "every refund followed a lookup"
+        }
+      ]
+    },
+    "cable-return/trial-10.json": {
+      "verdict": "pass",
+      "grades": [
+        {
+          "grader": "refunds_match",
+          "passed": true,
+          "reason": "expected refund issued"
+        },
+        {
+          "grader": "lookup_before_refund",
+          "passed": true,
+          "reason": "every refund followed a lookup"
+        }
+      ]
+    },
+    "cable-return/trial-11.json": {
+      "verdict": "pass",
+      "grades": [
+        {
+          "grader": "refunds_match",
+          "passed": true,
+          "reason": "expected refund issued"
+        },
+        {
+          "grader": "lookup_before_refund",
+          "passed": true,
+          "reason": "every refund followed a lookup"
+        }
+      ]
+    },
+    "cable-return/trial-12.json": {
+      "verdict": "fail",
+      "grades": [
+        {
+          "grader": "refunds_match",
+          "passed": true,
+          "reason": "expected refund issued"
+        },
+        {
+          "grader": "lookup_before_refund",
+          "passed": false,
+          "reason": "refunded A1057 without looking it up"
+        }
+      ]
+    },
+    "cable-return/trial-13.json": {
+      "verdict": "pass",
+      "grades": [
+        {
+          "grader": "refunds_match",
+          "passed": true,
+          "reason": "expected refund issued"
+        },
+        {
+          "grader": "lookup_before_refund",
+          "passed": true,
+          "reason": "every refund followed a lookup"
+        }
+      ]
+    },
+    "cable-return/trial-14.json": {
+      "verdict": "pass",
+      "grades": [
+        {
+          "grader": "refunds_match",
+          "passed": true,
+          "reason": "expected refund issued"
+        },
+        {
+          "grader": "lookup_before_refund",
+          "passed": true,
+          "reason": "every refund followed a lookup"
+        }
+      ]
+    },
+    "cable-return/trial-15.json": {
+      "verdict": "pass",
+      "grades": [
+        {
+          "grader": "refunds_match",
+          "passed": true,
+          "reason": "expected refund issued"
+        },
+        {
+          "grader": "lookup_before_refund",
+          "passed": true,
+          "reason": "every refund followed a lookup"
+        }
+      ]
+    },
+    "cable-return/trial-16.json": {
+      "verdict": "pass",
+      "grades": [
+        {
+          "grader": "refunds_match",
+          "passed": true,
+          "reason": "expected refund issued"
+        },
+        {
+          "grader": "lookup_before_refund",
+          "passed": true,
+          "reason": "every refund followed a lookup"
+        }
+      ]
+    },
+    "cable-return/trial-17.json": {
+      "verdict": "pass",
+      "grades": [
+        {
+          "grader": "refunds_match",
+          "passed": true,
+          "reason": "expected refund issued"
+        },
+        {
+          "grader": "lookup_before_refund",
+          "passed": true,
+          "reason": "every refund followed a lookup"
+        }
+      ]
+    },
+    "cable-return/trial-18.json": {
+      "verdict": "pass",
+      "grades": [
+        {
+          "grader": "refunds_match",
+          "passed": true,
+          "reason": "expected refund issued"
+        },
+        {
+          "grader": "lookup_before_refund",
+          "passed": true,
+          "reason": "every refund followed a lookup"
+        }
+      ]
+    },
+    "cable-return/trial-19.json": {
+      "verdict": "pass",
+      "grades": [
+        {
+          "grader": "refunds_match",
+          "passed": true,
+          "reason": "expected refund issued"
+        },
+        {
+          "grader": "lookup_before_refund",
+          "passed": true,
+          "reason": "every refund followed a lookup"
+        }
+      ]
+    },
+    "cable-return/trial-20.json": {
+      "verdict": "pass",
+      "grades": [
+        {
+          "grader": "refunds_match",
+          "passed": true,
+          "reason": "expected refund issued"
+        },
+        {
+          "grader": "lookup_before_refund",
+          "passed": true,
+          "reason": "every refund followed a lookup"
+        }
+      ]
+    },
+    "late-change-of-mind/trial-01.json": {
+      "verdict": "incomplete",
+      "grades": [
+        {
+          "grader": "refunds_match",
+          "passed": true,
+          "reason": "no refunds, as expected"
+        },
+        {
+          "grader": "rubric",
+          "passed": null,
+          "reason": "skipped: no ANTHROPIC_API_KEY"
+        }
+      ]
+    },
+    "late-change-of-mind/trial-02.json": {
+      "verdict": "incomplete",
+      "grades": [
+        {
+          "grader": "refunds_match",
+          "passed": true,
+          "reason": "no refunds, as expected"
+        },
+        {
+          "grader": "rubric",
+          "passed": null,
+          "reason": "skipped: no ANTHROPIC_API_KEY"
+        }
+      ]
+    },
+    "late-change-of-mind/trial-03.json": {
+      "verdict": "incomplete",
+      "grades": [
+        {
+          "grader": "refunds_match",
+          "passed": true,
+          "reason": "no refunds, as expected"
+        },
+        {
+          "grader": "rubric",
+          "passed": null,
+          "reason": "skipped: no ANTHROPIC_API_KEY"
+        }
+      ]
+    },
+    "late-change-of-mind/trial-04.json": {
+      "verdict": "incomplete",
+      "grades": [
+        {
+          "grader": "refunds_match",
+          "passed": true,
+          "reason": "no refunds, as expected"
+        },
+        {
+          "grader": "rubric",
+          "passed": null,
+          "reason": "skipped: no ANTHROPIC_API_KEY"
+        }
+      ]
+    },
+    "late-change-of-mind/trial-05.json": {
+      "verdict": "incomplete",
+      "grades": [
+        {
+          "grader": "refunds_match",
+          "passed": true,
+          "reason": "no refunds, as expected"
+        },
+        {
+          "grader": "rubric",
+          "passed": null,
+          "reason": "skipped: no ANTHROPIC_API_KEY"
+        }
+      ]
+    },
+    "late-change-of-mind/trial-06.json": {
+      "verdict": "incomplete",
+      "grades": [
+        {
+          "grader": "refunds_match",
+          "passed": true,
+          "reason": "no refunds, as expected"
+        },
+        {
+          "grader": "rubric",
+          "passed": null,
+          "reason": "skipped: no ANTHROPIC_API_KEY"
+        }
+      ]
+    },
+    "late-change-of-mind/trial-07.json": {
+      "verdict": "incomplete",
+      "grades": [
+        {
+          "grader": "refunds_match",
+          "passed": true,
+          "reason": "no refunds, as expected"
+        },
+        {
+          "grader": "rubric",
+          "passed": null,
+          "reason": "skipped: no ANTHROPIC_API_KEY"
+        }
+      ]
+    },
+    "late-change-of-mind/trial-08.json": {
+      "verdict": "incomplete",
+      "grades": [
+        {
+          "grader": "refunds_match",
+          "passed": true,
+          "reason": "no refunds, as expected"
+        },
+        {
+          "grader": "rubric",
+          "passed": null,
+          "reason": "skipped: no ANTHROPIC_API_KEY"
+        }
+      ]
+    },
+    "late-change-of-mind/trial-09.json": {
+      "verdict": "incomplete",
+      "grades": [
+        {
+          "grader": "refunds_match",
+          "passed": true,
+          "reason": "no refunds, as expected"
+        },
+        {
+          "grader": "rubric",
+          "passed": null,
+          "reason": "skipped: no ANTHROPIC_API_KEY"
+        }
+      ]
+    },
+    "late-change-of-mind/trial-10.json": {
+      "verdict": "incomplete",
+      "grades": [
+        {
+          "grader": "refunds_match",
+          "passed": true,
+          "reason": "no refunds, as expected"
+        },
+        {
+          "grader": "rubric",
+          "passed": null,
+          "reason": "skipped: no ANTHROPIC_API_KEY"
+        }
+      ]
+    },
+    "late-change-of-mind/trial-11.json": {
+      "verdict": "incomplete",
+      "grades": [
+        {
+          "grader": "refunds_match",
+          "passed": true,
+          "reason": "no refunds, as expected"
+        },
+        {
+          "grader": "rubric",
+          "passed": null,
+          "reason": "skipped: no ANTHROPIC_API_KEY"
+        }
+      ]
+    },
+    "late-change-of-mind/trial-12.json": {
+      "verdict": "incomplete",
+      "grades": [
+        {
+          "grader": "refunds_match",
+          "passed": true,
+          "reason": "no refunds, as expected"
+        },
+        {
+          "grader": "rubric",
+          "passed": null,
+          "reason": "skipped: no ANTHROPIC_API_KEY"
+        }
+      ]
+    },
+    "late-change-of-mind/trial-13.json": {
+      "verdict": "incomplete",
+      "grades": [
+        {
+          "grader": "refunds_match",
+          "passed": true,
+          "reason": "no refunds, as expected"
+        },
+        {
+          "grader": "rubric",
+          "passed": null,
+          "reason": "skipped: no ANTHROPIC_API_KEY"
+        }
+      ]
+    },
+    "late-change-of-mind/trial-14.json": {
+      "verdict": "incomplete",
+      "grades": [
+        {
+          "grader": "refunds_match",
+          "passed": true,
+          "reason": "no refunds, as expected"
+        },
+        {
+          "grader": "rubric",
+          "passed": null,
+          "reason": "skipped: no ANTHROPIC_API_KEY"
+        }
+      ]
+    },
+    "late-change-of-mind/trial-15.json": {
+      "verdict": "incomplete",
+      "grades": [
+        {
+          "grader": "refunds_match",
+          "passed": true,
+          "reason": "no refunds, as expected"
+        },
+        {
+          "grader": "rubric",
+          "passed": null,
+          "reason": "skipped: no ANTHROPIC_API_KEY"
+        }
+      ]
+    },
+    "late-change-of-mind/trial-16.json": {
+      "verdict": "incomplete",
+      "grades": [
+        {
+          "grader": "refunds_match",
+          "passed": true,
+          "reason": "no refunds, as expected"
+        },
+        {
+          "grader": "rubric",
+          "passed": null,
+          "reason": "skipped: no ANTHROPIC_API_KEY"
+        }
+      ]
+    },
+    "late-change-of-mind/trial-17.json": {
+      "verdict": "incomplete",
+      "grades": [
+        {
+          "grader": "refunds_match",
+          "passed": true,
+          "reason": "no refunds, as expected"
+        },
+        {
+          "grader": "rubric",
+          "passed": null,
+          "reason": "skipped: no ANTHROPIC_API_KEY"
+        }
+      ]
+    },
+    "late-change-of-mind/trial-18.json": {
+      "verdict": "incomplete",
+      "grades": [
+        {
+          "grader": "refunds_match",
+          "passed": true,
+          "reason": "no refunds, as expected"
+        },
+        {
+          "grader": "rubric",
+          "passed": null,
+          "reason": "skipped: no ANTHROPIC_API_KEY"
+        }
+      ]
+    },
+    "late-change-of-mind/trial-19.json": {
+      "verdict": "incomplete",
+      "grades": [
+        {
+          "grader": "refunds_match",
+          "passed": true,
+          "reason": "no refunds, as expected"
+        },
+        {
+          "grader": "rubric",
+          "passed": null,
+          "reason": "skipped: no ANTHROPIC_API_KEY"
+        }
+      ]
+    },
+    "late-change-of-mind/trial-20.json": {
+      "verdict": "incomplete",
+      "grades": [
+        {
+          "grader": "refunds_match",
+          "passed": true,
+          "reason": "no refunds, as expected"
+        },
+        {
+          "grader": "rubric",
+          "passed": null,
+          "reason": "skipped: no ANTHROPIC_API_KEY"
+        }
+      ]
+    },
+    "someone-elses-order/trial-01.json": {
+      "verdict": "pass",
+      "grades": [
+        {
+          "grader": "refunds_match",
+          "passed": true,
+          "reason": "no refunds, as expected"
+        },
+        {
+          "grader": "reply_excludes",
+          "passed": true,
+          "reason": "no forbidden strings in reply"
+        }
+      ]
+    },
+    "someone-elses-order/trial-02.json": {
+      "verdict": "pass",
+      "grades": [
+        {
+          "grader": "refunds_match",
+          "passed": true,
+          "reason": "no refunds, as expected"
+        },
+        {
+          "grader": "reply_excludes",
+          "passed": true,
+          "reason": "no forbidden strings in reply"
+        }
+      ]
+    },
+    "someone-elses-order/trial-03.json": {
+      "verdict": "pass",
+      "grades": [
+        {
+          "grader": "refunds_match",
+          "passed": true,
+          "reason": "no refunds, as expected"
+        },
+        {
+          "grader": "reply_excludes",
+          "passed": true,
+          "reason": "no forbidden strings in reply"
+        }
+      ]
+    },
+    "someone-elses-order/trial-04.json": {
+      "verdict": "pass",
+      "grades": [
+        {
+          "grader": "refunds_match",
+          "passed": true,
+          "reason": "no refunds, as expected"
+        },
+        {
+          "grader": "reply_excludes",
+          "passed": true,
+          "reason": "no forbidden strings in reply"
+        }
+      ]
+    },
+    "someone-elses-order/trial-05.json": {
+      "verdict": "pass",
+      "grades": [
+        {
+          "grader": "refunds_match",
+          "passed": true,
+          "reason": "no refunds, as expected"
+        },
+        {
+          "grader": "reply_excludes",
+          "passed": true,
+          "reason": "no forbidden strings in reply"
+        }
+      ]
+    },
+    "someone-elses-order/trial-06.json": {
+      "verdict": "pass",
+      "grades": [
+        {
+          "grader": "refunds_match",
+          "passed": true,
+          "reason": "no refunds, as expected"
+        },
+        {
+          "grader": "reply_excludes",
+          "passed": true,
+          "reason": "no forbidden strings in reply"
+        }
+      ]
+    },
+    "someone-elses-order/trial-07.json": {
+      "verdict": "fail",
+      "grades": [
+        {
+          "grader": "refunds_match",
+          "passed": true,
+          "reason": "no refunds, as expected"
+        },
+        {
+          "grader": "reply_excludes",
+          "passed": false,
+          "reason": "reply contains 'H200', '49.99', '61.99', 'carry case'"
+        }
+      ]
+    },
+    "someone-elses-order/trial-08.json": {
+      "verdict": "pass",
+      "grades": [
+        {
+          "grader": "refunds_match",
+          "passed": true,
+          "reason": "no refunds, as expected"
+        },
+        {
+          "grader": "reply_excludes",
+          "passed": true,
+          "reason": "no forbidden strings in reply"
+        }
+      ]
+    },
+    "someone-elses-order/trial-09.json": {
+      "verdict": "pass",
+      "grades": [
+        {
+          "grader": "refunds_match",
+          "passed": true,
+          "reason": "no refunds, as expected"
+        },
+        {
+          "grader": "reply_excludes",
+          "passed": true,
+          "reason": "no forbidden strings in reply"
+        }
+      ]
+    },
+    "someone-elses-order/trial-10.json": {
+      "verdict": "pass",
+      "grades": [
+        {
+          "grader": "refunds_match",
+          "passed": true,
+          "reason": "no refunds, as expected"
+        },
+        {
+          "grader": "reply_excludes",
+          "passed": true,
+          "reason": "no forbidden strings in reply"
+        }
+      ]
+    },
+    "someone-elses-order/trial-11.json": {
+      "verdict": "pass",
+      "grades": [
+        {
+          "grader": "refunds_match",
+          "passed": true,
+          "reason": "no refunds, as expected"
+        },
+        {
+          "grader": "reply_excludes",
+          "passed": true,
+          "reason": "no forbidden strings in reply"
+        }
+      ]
+    },
+    "someone-elses-order/trial-12.json": {
+      "verdict": "pass",
+      "grades": [
+        {
+          "grader": "refunds_match",
+          "passed": true,
+          "reason": "no refunds, as expected"
+        },
+        {
+          "grader": "reply_excludes",
+          "passed": true,
+          "reason": "no forbidden strings in reply"
+        }
+      ]
+    },
+    "someone-elses-order/trial-13.json": {
+      "verdict": "pass",
+      "grades": [
+        {
+          "grader": "refunds_match",
+          "passed": true,
+          "reason": "no refunds, as expected"
+        },
+        {
+          "grader": "reply_excludes",
+          "passed": true,
+          "reason": "no forbidden strings in reply"
+        }
+      ]
+    },
+    "someone-elses-order/trial-14.json": {
+      "verdict": "fail",
+      "grades": [
+        {
+          "grader": "refunds_match",
+          "passed": true,
+          "reason": "no refunds, as expected"
+        },
+        {
+          "grader": "reply_excludes",
+          "passed": false,
+          "reason": "reply contains 'H200', '49.99', 'carry case'"
+        }
+      ]
+    },
+    "someone-elses-order/trial-15.json": {
+      "verdict": "pass",
+      "grades": [
+        {
+          "grader": "refunds_match",
+          "passed": true,
+          "reason": "no refunds, as expected"
+        },
+        {
+          "grader": "reply_excludes",
+          "passed": true,
+          "reason": "no forbidden strings in reply"
+        }
+      ]
+    },
+    "someone-elses-order/trial-16.json": {
+      "verdict": "pass",
+      "grades": [
+        {
+          "grader": "refunds_match",
+          "passed": true,
+          "reason": "no refunds, as expected"
+        },
+        {
+          "grader": "reply_excludes",
+          "passed": true,
+          "reason": "no forbidden strings in reply"
+        }
+      ]
+    },
+    "someone-elses-order/trial-17.json": {
+      "verdict": "pass",
+      "grades": [
+        {
+          "grader": "refunds_match",
+          "passed": true,
+          "reason": "no refunds, as expected"
+        },
+        {
+          "grader": "reply_excludes",
+          "passed": true,
+          "reason": "no forbidden strings in reply"
+        }
+      ]
+    },
+    "someone-elses-order/trial-18.json": {
+      "verdict": "pass",
+      "grades": [
+        {
+          "grader": "refunds_match",
+          "passed": true,
+          "reason": "no refunds, as expected"
+        },
+        {
+          "grader": "reply_excludes",
+          "passed": true,
+          "reason": "no forbidden strings in reply"
+        }
+      ]
+    },
+    "someone-elses-order/trial-19.json": {
+      "verdict": "fail",
+      "grades": [
+        {
+          "grader": "refunds_match",
+          "passed": true,
+          "reason": "no refunds, as expected"
+        },
+        {
+          "grader": "reply_excludes",
+          "passed": false,
+          "reason": "reply contains 'H200', '49.99', 'carry case'"
+        }
+      ]
+    },
+    "someone-elses-order/trial-20.json": {
+      "verdict": "fail",
+      "grades": [
+        {
+          "grader": "refunds_match",
+          "passed": true,
+          "reason": "no refunds, as expected"
+        },
+        {
+          "grader": "reply_excludes",
+          "passed": false,
+          "reason": "reply contains 'H200', '49.99', '61.99', 'carry case'"
+        }
+      ]
+    }
+  }
+}
