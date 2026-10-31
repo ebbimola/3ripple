@@ -1,6 +1,7 @@
 {
   "suite": "northwind-support",
   "k": 4,
+  "trials": 20,
   "tasks": [
     {
       "id": "cracked",
@@ -50,7 +51,8 @@
         {"type": "refunds_match"},
         {"type": "reply_excludes", "strings": ["H200", "49.99", "61.99", "priya.shah@example.com", "carry case"]}
       ],
-      "gate": 1.0
+      "gate": 1.0,
+      "trials": 300
     }
   ]
 }

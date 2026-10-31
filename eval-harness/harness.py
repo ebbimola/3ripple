@@ -46,12 +46,16 @@ def run(suite, args, out):
         agent = (ScriptedAgent(task["id"], seed=f"{args.seed}-{i}") if args.agent == "scripted"
                  else ClaudeAgent(args.model, args.effort))
         t = run_trial(agent, task, i)
-        path = out / task["id"] / f"trial-{i:02d}.json"
+        path = out / task["id"] / f"trial-{i:03d}.json"
         path.parent.mkdir(parents=True, exist_ok=True)
         path.write_text(json.dumps(t, indent=2, ensure_ascii=False))
         return t
 
-    jobs = [(task, i) for task in suite["tasks"] for i in range(1, args.n + 1)]
+    def trials(task):
+        # -n on the command line wins; otherwise the task's own count; otherwise the suite default.
+        return args.n or task.get("trials") or suite.get("trials", 20)
+
+    jobs = [(task, i) for task in suite["tasks"] for i in range(1, trials(task) + 1)]
     with ThreadPoolExecutor(args.workers) as pool:
         for done, _ in enumerate(pool.map(one, jobs), 1):
             print(f"\r{done}/{len(jobs)} trials", end="", flush=True)
@@ -83,25 +87,30 @@ def report(suite, run_dir, agent, summaries):
     k = summaries[0]["k"]
     n_trials = sum(s["n"] for s in summaries)
     print(f"\nSuite '{suite['suite']}': {len(summaries)} tasks, {n_trials} trials, agent {agent}  ({run_dir})\n")
-    print(f"{'task':22} {'pass':>6} {'fail':>5} {'incomp':>6} {'pass@1':>7} {f'pass^{k}':>7} {'gate':>5}  result")
+    print(f"{'task':22} {'pass':>8} {'fail':>5} {'incomp':>6} {'pass@1':>7} {f'pass^{k}':>7} {'fail<=':>7} {'gate':>5}  result")
     for s in summaries:
         gate = "-" if s["gate"] is None else f"{s['gate']:.2f}"
-        print(f"{s['task_id']:22} {s['passed']:>3}/{s['n']:<2} {s['failed']:>5} {s['incomplete']:>6} "
-              f"{s['pass_rate']:>7.2f} {s['pass_hat_k']:>7.2f} {gate:>5}  {s['gate_result']}")
+        print(f"{s['task_id']:22} {s['passed']:>4}/{s['n']:<3} {s['failed']:>5} {s['incomplete']:>6} "
+              f"{s['pass_rate']:>7.2f} {s['pass_hat_k']:>7.2f} {s['fail_rate_upper']:>6.1%} {gate:>5}  {s['gate_result']}")
 
     failing = [s for s in summaries if s["failure_modes"]]
     if failing:
         print("\nFailure modes (from the graders, not the wording):")
         for s in failing:
-            print(f"  {s['task_id']}  (trials {', '.join(map(str, s['failing_trials']))})")
+            shown = ", ".join(map(str, s["failing_trials"][:8]))
+            more = f", +{len(s['failing_trials']) - 8} more" if len(s["failing_trials"]) > 8 else ""
+            print(f"  {s['task_id']}  (trials {shown}{more})")
             for grader, count, example in s["failure_modes"]:
                 print(f"    {count}x {grader:21} e.g. {example}")
         s = failing[0]
-        first = "trial-%02d.json" % s["failing_trials"][0]
+        first = "trial-%03d.json" % s["failing_trials"][0]
         print(f"\n  Read one: {Path(run_dir) / s['task_id'] / first}")
     blocked = [s["task_id"] for s in summaries if s["incomplete"]]
     if blocked:
         print(f"\nIncomplete: a grader was skipped on {', '.join(blocked)} (set ANTHROPIC_API_KEY for the model grader).")
+
+    print("\nfail<= is the one-sided 95% upper bound on the true failure rate. A clean 20/20 only bounds it at 14%;"
+          "\nunder 1% takes about 300 clean trials. Size a 1.00 gate accordingly (see 'trials' in tasks.json).")
 
     passed = sum(s["passed"] for s in summaries)
     gated = [s for s in summaries if s["gate"] is not None]
@@ -118,7 +127,7 @@ def main():
     p.add_argument("--model", default="claude-haiku-5-5")
     p.add_argument("--effort", default="low", choices=["low", "medium", "high", "xhigh", "max"])
     p.add_argument("--task", action="append", help="run only this task (repeatable)")
-    p.add_argument("-n", type=int, default=20, help="trials per task (default 20)")
+    p.add_argument("-n", type=int, help="trials per task, overriding tasks.json (default: per task, else 20)")
     p.add_argument("-k", type=int, help="k for pass^k (default: from tasks.json)")
     p.add_argument("--seed", default="1", help="seed for the scripted agent")
     p.add_argument("--workers", type=int, default=5)
