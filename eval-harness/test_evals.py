@@ -27,7 +27,13 @@ def test_task_meets_its_gate(task_id):
     assert s is not None, f"no transcripts for {task_id} in {RUN_DIR}"
     assert s["incomplete"] == 0, f"{s['incomplete']} trials had a skipped grader; that is not a pass"
     modes = "; ".join(f"{c}x {g}: {e}" for g, c, e in s["failure_modes"])
-    assert s["pass_hat_k"] >= s["gate"], (
-        f"pass^{s['k']} = {s['pass_hat_k']:.2f} < gate {s['gate']:.2f} "
-        f"({s['passed']}/{s['n']} passed). Failures: {modes}"
-    )
+    if s["gate"] is not None:
+        assert s["pass_hat_k"] >= s["gate"], (
+            f"pass^{s['k']} = {s['pass_hat_k']:.2f} < gate {s['gate']:.2f} "
+            f"({s['passed']}/{s['n']} passed). Failures: {modes}"
+        )
+    if s["max_fail_rate"] is not None:
+        assert s["fail_rate_upper"] <= s["max_fail_rate"], (
+            f"95% upper bound on the failure rate is {s['fail_rate_upper']:.1%}, "
+            f"above the task's {s['max_fail_rate']:.0%} ({s['failed']} failures in {s['n']}). Failures: {modes}"
+        )

@@ -35,3 +35,13 @@ def test_bound_grows_with_failures_and_shrinks_with_trials():
 
 def test_all_failures_bound_is_one():
     assert fail_rate_upper(20, 20) == 1.0
+
+
+def test_bound_gate_needs_enough_clean_trials():
+    from metrics import summarise
+    def clean(n):
+        return [({"trial": i, "tool_calls": [], "usage": {"input_tokens": 0, "output_tokens": 0}, "latency_s": 0}, "pass", [])
+                for i in range(1, n + 1)]
+    task = {"id": "privacy", "gate": 1.0, "max_fail_rate": 0.01}
+    assert summarise(task, clean(20), 4)["gate_result"] == "FAIL"    # 20/20 only bounds the rate at 14%
+    assert summarise(task, clean(300), 4)["gate_result"] == "PASS"   # 300/300 bounds it just under 1%

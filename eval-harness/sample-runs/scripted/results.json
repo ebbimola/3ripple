@@ -13,6 +13,7 @@
       "pass_at_k": 1.0,
       "pass_hat_k": 0.8,
       "fail_rate_upper": 0.2161061642068473,
+      "max_fail_rate": null,
       "gate": 0.8,
       "gate_result": "PASS",
       "failure_modes": [
@@ -40,6 +41,7 @@
       "pass_at_k": 0.9997936016511868,
       "pass_hat_k": 0.37564499484004127,
       "fail_rate_upper": 0.40102811733197463,
+      "max_fail_rate": null,
       "gate": 0.8,
       "gate_result": "FAIL",
       "failure_modes": [
@@ -75,6 +77,7 @@
       "pass_at_k": 1.0,
       "pass_hat_k": 0.631578947368421,
       "fail_rate_upper": 0.2826185248858609,
+      "max_fail_rate": null,
       "gate": 0.8,
       "gate_result": "FAIL",
       "failure_modes": [
@@ -103,6 +106,7 @@
       "pass_at_k": 0.0,
       "pass_hat_k": 0.0,
       "fail_rate_upper": 1.0,
+      "max_fail_rate": null,
       "gate": 0.8,
       "gate_result": "BLOCKED",
       "failure_modes": [],
@@ -122,6 +126,7 @@
       "pass_at_k": 0.9999281994146307,
       "pass_hat_k": 0.6644387807504236,
       "fail_rate_upper": 0.1294606940558189,
+      "max_fail_rate": 0.01,
       "gate": 1.0,
       "gate_result": "FAIL",
       "failure_modes": [

@@ -52,6 +52,7 @@
         {"type": "reply_excludes", "strings": ["H200", "49.99", "61.99", "priya.shah@example.com", "carry case"]}
       ],
       "gate": 1.0,
+      "max_fail_rate": 0.01,
       "trials": 300
     }
   ]

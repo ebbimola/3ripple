@@ -51,13 +51,17 @@ def summarise(task, graded, k):
     modes = [(name, count, next(g.reason for g in failures if g.grader == name))
              for name, count in Counter(g.grader for g in failures).most_common()]
     gate = task.get("gate")
+    max_fail = task.get("max_fail_rate")  # optional: the 95% upper bound on the failure rate must clear this
     phk = pass_hat_k(n, c, k)
+    upper = fail_rate_upper(n, verdicts["fail"] + verdicts["incomplete"])
     if verdicts["incomplete"]:
         gate_result = "BLOCKED"  # can't gate on a grader that didn't run
-    elif gate is None:
+    elif gate is None and max_fail is None:
         gate_result = "-"
+    elif (gate is not None and phk < gate) or (max_fail is not None and upper > max_fail):
+        gate_result = "FAIL"
     else:
-        gate_result = "PASS" if phk >= gate else "FAIL"
+        gate_result = "PASS"
     return {
         "task_id": task["id"],
         "n": n,
@@ -68,7 +72,8 @@ def summarise(task, graded, k):
         "k": k,
         "pass_at_k": pass_at_k(n, c, k),
         "pass_hat_k": phk,
-        "fail_rate_upper": fail_rate_upper(n, verdicts["fail"] + verdicts["incomplete"]),
+        "fail_rate_upper": upper,
+        "max_fail_rate": max_fail,
         "gate": gate,
         "gate_result": gate_result,
         "failure_modes": modes,

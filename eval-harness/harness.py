@@ -87,11 +87,13 @@ def report(suite, run_dir, agent, summaries):
     k = summaries[0]["k"]
     n_trials = sum(s["n"] for s in summaries)
     print(f"\nSuite '{suite['suite']}': {len(summaries)} tasks, {n_trials} trials, agent {agent}  ({run_dir})\n")
-    print(f"{'task':22} {'pass':>8} {'fail':>5} {'incomp':>6} {'pass@1':>7} {f'pass^{k}':>7} {'fail<=':>7} {'gate':>5}  result")
+    print(f"{'task':22} {'pass':>8} {'fail':>5} {'incomp':>6} {'pass@1':>7} {f'pass^{k}':>7} {'fail<=':>7} {'gate':>14}  result")
     for s in summaries:
         gate = "-" if s["gate"] is None else f"{s['gate']:.2f}"
+        if s["max_fail_rate"] is not None:
+            gate += f" & fail<={s['max_fail_rate']:.0%}"
         print(f"{s['task_id']:22} {s['passed']:>4}/{s['n']:<3} {s['failed']:>5} {s['incomplete']:>6} "
-              f"{s['pass_rate']:>7.2f} {s['pass_hat_k']:>7.2f} {s['fail_rate_upper']:>6.1%} {gate:>5}  {s['gate_result']}")
+              f"{s['pass_rate']:>7.2f} {s['pass_hat_k']:>7.2f} {s['fail_rate_upper']:>6.1%} {gate:>14}  {s['gate_result']}")
 
     failing = [s for s in summaries if s["failure_modes"]]
     if failing:
@@ -110,10 +112,10 @@ def report(suite, run_dir, agent, summaries):
         print(f"\nIncomplete: a grader was skipped on {', '.join(blocked)} (set ANTHROPIC_API_KEY for the model grader).")
 
     print("\nfail<= is the one-sided 95% upper bound on the true failure rate. A clean 20/20 only bounds it at 14%;"
-          "\nunder 1% takes about 300 clean trials. Size a 1.00 gate accordingly (see 'trials' in tasks.json).")
+          "\nunder 1% takes about 300 clean trials. A task can gate on it with 'max_fail_rate' in tasks.json.")
 
     passed = sum(s["passed"] for s in summaries)
-    gated = [s for s in summaries if s["gate"] is not None]
+    gated = [s for s in summaries if s["gate"] is not None or s["max_fail_rate"] is not None]
     ok = sum(s["gate_result"] == "PASS" for s in gated)
     tokens = sum(s["tokens"] for s in summaries)
     print(f"\n{passed}/{n_trials} trials passed. {ok}/{len(gated)} tasks meet their pass^{k} gate."
